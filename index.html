@@ -1,245 +1,743 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ne">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3D Earth Visualization</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.min.js"></script>
+    <title>तिलक बहादुर थापा - जग्गा जमिन र अस्थायी सम्पत्ति व्यवसाय</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        body {
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #e74c3c;
+            --accent-color: #f39c12;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+        }
+        
+        * {
             margin: 0;
-            overflow: hidden;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        #earth-container {
-            position: relative;
-            width: 100vw;
+        
+        body {
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .logo span {
+            color: var(--accent-color);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--accent-color);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
             height: 100vh;
-        }
-        #info-panel {
-            position: absolute;
-            bottom: 20px;
-            left: 20px;
-            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            text-align: center;
             color: white;
-            padding: 15px;
+            margin-top: 60px;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #d35400;
+        }
+        
+        /* About Section */
+        .section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 36px;
+            color: var(--primary-color);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 3px;
+            background-color: var(--accent-color);
+            bottom: 0;
+            left: 25%;
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+            padding-right: 30px;
+        }
+        
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .about-image img {
+            width: 100%;
             border-radius: 10px;
-            max-width: 300px;
-            backdrop-filter: blur(5px);
-            z-index: 100;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
-        #loading {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: white;
-            font-size: 1.5rem;
-            z-index: 100;
+        
+        /* Services Section */
+        .services {
+            background-color: var(--light-color);
         }
-        .glow {
-            position: absolute;
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-card {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .service-icon {
+            font-size: 50px;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+        }
+        
+        .service-card h3 {
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+        
+        /* Properties Section */
+        .properties-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .property-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+        
+        .property-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .property-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .property-image img {
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at center, rgba(64, 158, 255, 0.3) 0%, transparent 70%);
-            pointer-events: none;
-            z-index: 1;
+            object-fit: cover;
+            transition: transform 0.5s;
         }
-        #controls {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            z-index: 100;
-        }
-        .control-btn {
-            background: rgba(0, 0, 0, 0.7);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            font-size: 1.2rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            backdrop-filter: blur(5px);
-        }
-        .control-btn:hover {
-            background: rgba(30, 144, 255, 0.8);
+        
+        .property-card:hover .property-image img {
             transform: scale(1.1);
         }
+        
+        .property-info {
+            padding: 20px;
+        }
+        
+        .property-info h3 {
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+        
+        .property-info p {
+            margin-bottom: 15px;
+            color: #666;
+        }
+        
+        .property-price {
+            font-weight: bold;
+            color: var(--secondary-color);
+            font-size: 20px;
+        }
+        
+        /* Contact Section */
+        .contact {
+            background-color: var(--light-color);
+        }
+        
+        .contact-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .contact-info {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .contact-info h3 {
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+        
+        .contact-details {
+            margin-bottom: 30px;
+        }
+        
+        .contact-details p {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .contact-details i {
+            margin-right: 10px;
+            color: var(--accent-color);
+            width: 20px;
+        }
+        
+        .social-links a {
+            display: inline-block;
+            margin-right: 15px;
+            color: var(--primary-color);
+            font-size: 20px;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: var(--accent-color);
+        }
+        
+        .contact-form {
+            flex: 1;
+            min-width: 300px;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        .form-group textarea {
+            height: 150px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .footer-logo {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        
+        .footer-logo span {
+            color: var(--accent-color);
+        }
+        
+        .footer-links {
+            margin-bottom: 20px;
+        }
+        
+        .footer-links a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent-color);
+        }
+        
+        .copyright {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #bbb;
+        }
+        
+        .developer-credit {
+            margin-top: 10px;
+            font-size: 12px;
+            color: #999;
+        }
+        
+        .developer-credit a {
+            color: #bbb;
+            text-decoration: none;
+        }
+        
+        .developer-credit a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 0 20px;
+            }
+            
+            nav {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 80%;
+                height: calc(100vh - 70px);
+                background-color: var(--primary-color);
+                transition: left 0.3s;
+                z-index: 999;
+            }
+            
+            nav.active {
+                left: 0;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                padding: 20px;
+            }
+            
+            nav ul li {
+                margin: 15px 0;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+            
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .about-text {
+                padding-right: 0;
+                margin-bottom: 30px;
+            }
+            
+            .section-title h2 {
+                font-size: 30px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 28px;
+            }
+            
+            .hero p {
+                font-size: 16px;
+            }
+            
+            .btn {
+                padding: 10px 20px;
+            }
+            
+            .section {
+                padding: 50px 0;
+            }
+            
+            .footer-links {
+                display: flex;
+                flex-direction: column;
+            }
+            
+            .footer-links a {
+                margin: 5px 0;
+            }
+        }
     </style>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
-<body class="bg-gray-900">
-    <div id="earth-container">
-        <div class="glow"></div>
-        <div id="loading">Loading Earth...</div>
-           
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">तिलक <span>थापा</span></div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="#home">गृहपृष्ठ</a></li>
+                    <li><a href="#about">हाम्रो बारेमा</a></li>
+                    <li><a href="#services">सेवाहरू</a></li>
+                    <li><a href="#properties">जग्गा जमिनहरू</a></li>
+                    <li><a href="#contact">सम्पर्क</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container hero-content">
+            <h1>पोखरामा उत्कृष्ट जग्गा जमिन विकास</h1>
+            <p>खाली जग्गालाई उच्च गुणस्तर र ईमान्दारीपूर्वक आवासीय सम्पत्तिमा परिणत गर्दै</p>
+            <a href="#contact" class="btn">सम्पर्क गर्नुहोस्</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section" id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>हाम्रो बारेमा</h2>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>तिलक बहादुर थापा</h3>
+                    <p>१५ वर्षभन्दा बढीको रियल इस्टेट अनुभवको साथ, तिलक बहादुर थापा पोखरा क्षेत्रमा जग्गा जमिन विकासको विश्वसनीय नाम बनेका छन्। हाम्रो व्यवसायले उत्तम जग्गा खरिद गर्ने, यसलाई आवासीय निर्माणको लागि तयार गर्ने, र परिवारहरूले आफ्नो सपनाको घर बनाउन सक्ने मूल्यवान सम्पत्तिहरू सिर्जना गर्न विशेषज्ञता राख्दछ।</p>
+                    <p>हामी जग्गा विकासको हाम्रो सूक्ष्म दृष्टिकोणमा गर्व गर्छौं, जसमा उचित ग्रेडिंग, जल निकासी, र पहुँच सुनिश्चित गरी सम्पत्तिहरू बिक्री गरिन्छ। नैतिक व्यवसाय अभ्यास र ग्राहक सन्तुष्टिको प्रतिबद्धताले स्थानीय रियल इस्टेट बजारमा हामीलाई विश्वसनीयताको प्रतिष्ठा दिलाएको छ।</p>
+                    <p>पोखरा-२६, विजयपुरमा आधारित, हामीसँग स्थानीय जग्गा बजार र विकास नियमहरूको गहिरो बुझाइ छ, जसले हाम्रा ग्राहकहरूलाई विश्वासका साथ प्रक्रिया निर्देशन गर्न मद्दत गर्दछ।</p>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="तिलक बहादुर थापा रियल इस्टेट">
                 </div>
             </div>
         </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="section services" id="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>हाम्रा सेवाहरू</h2>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-search-location"></i>
+                    </div>
+                    <h3>जग्गा जमिन खरिद</h3>
+                    <p>हामी पोखरा क्षेत्रमा आवासीय विकासको उत्कृष्ट सम्भावनाका साथ उत्तम जग्गा जमिन चिनाउँदछौं र खरिद गर्दछौं।</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-tractor"></i>
+                    </div>
+                    <h3>जग्गा जमिन तयारी</h3>
+                    <p>हाम्रो टोलीले उचित ग्रेडिंग, जल निकासी, र पहुँच सुधारहरूका साथ निर्माणको लागि जग्गा तयार गर्दछ।</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3>आवासीय प्लट बिक्री</h3>
+                    <p>हामी आवश्यक उपयोगिताहरू र स्पष्ट कागजातहरूका साथ बनाउन तयार आवासीय प्लटहरू प्रदान गर्दछौं।</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3>परामर्श</h3>
+                    <p>जग्गा खरिद, विकास सम्भावना, र स्थानीय निर्माण नियमहरूको विषयमा विशेषज्ञ सल्लाह।</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Properties Section -->
+    <section class="section" id="properties">
+        <div class="container">
+            <div class="section-title">
+                <h2>चयनित जग्गा जमिनहरू</h2>
+            </div>
+            <div class="properties-grid">
+                <div class="property-card">
+                    <div class="property-image">
+                        <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="विजयपुर आवासीय प्लट">
+                    </div>
+                    <div class="property-info">
+                        <h3>विजयपुर हाइट्स</h3>
+                        <p>पोखरा-२६, विजयपुरमा हिमाल दृश्य भएको प्रिमियम आवासीय प्लट</p>
+                        <p><i class="fas fa-ruler-combined"></i> ५ आना (१७४.२४ वर्ग मिटर)</p>
+                        <p><i class="fas fa-map-marker-alt"></i> विद्यालय र बजारहरूबाट हिँड्ने दूरीमा</p>
+                        <p class="property-price">रु ३५,००,०००</p>
+                    </div>
+                </div>
+                <div class="property-card">
+                    <div class="property-image">
+                        <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="लेकसाइड दृश्य प्लट">
+                    </div>
+                    <div class="property-info">
+                        <h3>लेकसाइड दृश्य प्लटहरू</h3>
+                        <p>फेवा तालको आंशिक दृश्य भएको सीमित उपलब्धता प्लटहरू</p>
+                        <p><i class="fas fa-ruler-combined"></i> ७ आना (२४४ वर्ग मिटर)</p>
+                        <p><i class="fas fa-map-marker-alt"></i> पोखरा शहर केन्द्रबाट १० मिनेट ड्राइव</p>
+                        <p class="property-price">रु ५०,००,०००</p>
+                    </div>
+                </div>
+                <div class="property-card">
+                    <div class="property-image">
+                        <img src="https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="परिवार आवासीय प्लट">
+                    </div>
+                    <div class="property-info">
+                        <h3>परिवार आवासीय प्लटहरू</h3>
+                        <p>शान्त आवास क्षेत्रमा परिवारका घरहरूको लागि उत्तम</p>
+                        <p><i class="fas fa-ruler-combined"></i> १० आना (३४९ वर्ग मिटर)</p>
+                        <p><i class="fas fa-map-marker-alt"></i> २४/७ सुरक्षा भएको गेटेड कम्युनिटी</p>
+                        <p class="property-price">रु ४५,००,०००</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section contact" id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>हामीलाई सम्पर्क गर्नुहोस्</h2>
+            </div>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>सम्पर्क जानकारी</h3>
+                    <div class="contact-details">
+                        <p><i class="fas fa-map-marker-alt"></i> पोखरा-२६, विजयपुर, नेपाल</p>
+                        <p><i class="fas fa-phone"></i> ९८५६०७५००९</p>
+                        <p><i class="fas fa-envelope"></i> info@tilakthaparealestate.com</p>
+                    </div>
+                    <h3>कार्यालय समय</h3>
+                    <p><i class="fas fa-clock"></i> आइतबार-शुक्रबार: ९:०० बिहान - ६:०० बेलुका</p>
+                    <p><i class="fas fa-clock"></i> शनिबार: बन्द</p>
+                    <div class="social-links">
+                        <h3 style="margin-top: 20px;">सामाजिक सञ्जाल</h3>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">तपाईंको नाम</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">तपाईंको इमेल</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">तपाईंको फोन नम्बर</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">तपाईंको सन्देश</label>
+                            <textarea id="message" name="message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">सन्देश पठाउनुहोस्</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">तिलक <span>थापा</span></div>
+                <div class="footer-links">
+                    <a href="#home">गृहपृष्ठ</a>
+                    <a href="#about">हाम्रो बारेमा</a>
+                    <a href="#services">सेवाहरू</a>
+                    <a href="#properties">जग्गा जमिनहरू</a>
+                    <a href="#contact">सम्पर्क</a>
+                </div>
+                <div class="copyright">
+                    &copy; २०२३ तिलक बहादुर थापा रियल इस्टेट। सर्वाधिकार सुरक्षित।
+                </div>
+                <div class="developer-credit">
+                    वेबसाइट विकास <a href="http://www.ptcnepal.com.np" target="_blank">PTC नेपाल</a> द्वारा
+                </div>
+            </div>
+        </div>
+    </footer>
 
     <script>
-        // Wait for DOM to load
-        document.addEventListener('DOMContentLoaded', () => {
-            // Scene setup
-            const scene = new THREE.Scene();
-            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-            const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            renderer.setPixelRatio(window.devicePixelRatio);
-            document.getElementById('earth-container').appendChild(renderer.domElement);
-            // Controls
-            const controls = new THREE.OrbitControls(camera, renderer.domElement);
-            controls.enableDamping = true;
-            controls.dampingFactor = 0.05;
-            controls.minDistance = 1.5;
-            controls.maxDistance = 5;
-            controls.autoRotate = true;
-            controls.autoRotateSpeed = 0.5;
-            // Camera position
-            camera.position.z = 3;
-            // Lighting
-            const ambientLight = new THREE.AmbientLight(0x404040);
-            scene.add(ambientLight);
-            const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
-            directionalLight.position.set(5, 3, 5);
-            scene.add(directionalLight);
-            // Earth geometry
-            const earthGeometry = new THREE.SphereGeometry(1, 64, 64);
-            // Textures
-            const textureLoader = new THREE.TextureLoader();
-            let earthTexture, bumpMap, specularMap, cloudTexture;
-            // Load textures
-            Promise.all([
-                new Promise(resolve => textureLoader.load('https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/textures/planets/earth_atmos_2048.jpg', resolve)),
-                new Promise(resolve => textureLoader.load('https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/textures/planets/earth_normal_2048.jpg', resolve)),
-                new Promise(resolve => textureLoader.load('https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/textures/planets/earth_specular_2048.jpg', resolve)),
-                new Promise(resolve => textureLoader.load('https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/textures/planets/earth_clouds_1024.png', resolve))
-            ]).then(([earthTex, bump, specular, clouds]) => {
-                earthTexture = earthTex;
-                bumpMap = bump;
-                specularMap = specular;
-                cloudTexture = clouds;
-                // Create earth material
-                const earthMaterial = new THREE.MeshPhongMaterial({
-                    map: earthTexture,
-                    bumpMap: bumpMap,
-                    bumpScale: 0.05,
-                    specularMap: specularMap,
-                    specular: new THREE.Color('grey'),
-                    shininess: 5
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mainNav = document.getElementById('mainNav');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mainNav.classList.toggle('active');
+        });
+        
+        // Smooth Scrolling for Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                if (mainNav.classList.contains('active')) {
+                    mainNav.classList.remove('active');
+                }
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
                 });
-                // Create earth mesh
-                const earthMesh = new THREE.Mesh(earthGeometry, earthMaterial);
-                scene.add(earthMesh);
-                // Create clouds
-                const cloudGeometry = new THREE.SphereGeometry(1.01, 64, 64);
-                const cloudMaterial = new THREE.MeshPhongMaterial({
-                    map: cloudTexture,
-                    transparent: true,
-                    opacity: 0.4,
-                    depthWrite: false
-                });
-                const cloudMesh = new THREE.Mesh(cloudGeometry, cloudMaterial);
-                scene.add(cloudMesh);
-                // Create atmosphere glow
-                const atmosphereGeometry = new THREE.SphereGeometry(1.1, 64, 64);
-                const atmosphereMaterial = new THREE.ShaderMaterial({
-                    uniforms: {
-                        glowColor: { type: "c", value: new THREE.Color(0x00b3ff) },
-                        viewVector: { type: "v3", value: camera.position }
-                    },
-                    vertexShader: `
-                        uniform vec3 viewVector;
-                        varying float intensity;
-                        void main() {
-                            gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-                            vec3 actual_normal = normalize(normalMatrix * normal);
-                            intensity = pow(0.7 - dot(actual_normal, normalize(viewVector)), 2.0);
-                        }
-                    `,
-                    fragmentShader: `
-                        uniform vec3 glowColor;
-                        varying float intensity;
-                        void main() {
-                            vec3 glow = glowColor * intensity;
-                            gl_FragColor = vec4(glow, 0.3);
-                        }
-                    `,
-                    side: THREE.BackSide,
-                    blending: THREE.AdditiveBlending,
-                    transparent: true
-                });
-                const atmosphereMesh = new THREE.Mesh(atmosphereGeometry, atmosphereMaterial);
-                scene.add(atmosphereMesh);
-                // Hide loading
-                document.getElementById('loading').style.display = 'none';
-                // Animation loop
-                const animate = () => {
-                    requestAnimationFrame(animate);
-                    
-                    // Rotate earth and clouds
-                    if (controls.autoRotate) {
-                        earthMesh.rotation.y += 0.001;
-                        cloudMesh.rotation.y += 0.0015; // Clouds rotate slightly faster
-                    }
-                    
-                    // Update atmosphere shader
-                    atmosphereMaterial.uniforms.viewVector.value = 
-                        new THREE.Vector3().subVectors(camera.position, atmosphereMesh.position);
-                    
-                    controls.update();
-                    renderer.render(scene, camera);
-                };
-                animate();
-                // UI Controls
-                document.getElementById('rotate-toggle').addEventListener('click', () => {
-                    controls.autoRotate = !controls.autoRotate;
-                    document.getElementById('rotate-toggle').style.backgroundColor = 
-                        controls.autoRotate ? 'rgba(30, 144, 255, 0.8)' : 'rgba(0, 0, 0, 0.7)';
-                });
-                document.getElementById('reset-view').addEventListener('click', () => {
-                    controls.reset();
-                    camera.position.z = 3;
-                });
-                document.getElementById('night-toggle').addEventListener('click', function() {
-                    const isNight = earthMaterial.specular.getHex() === 0x000000;
-                    earthMaterial.specular.setHex(isNight ? 0x111111 : 0x000000);
-                    earthMaterial.shininess = isNight ? 5 : 0;
-                    this.style.backgroundColor = isNight ? 'rgba(0, 0, 0, 0.7)' : 'rgba(30, 144, 255, 0.8)';
-                });
-                // Handle window resize
-                window.addEventListener('resize', () => {
-                    camera.aspect = window.innerWidth / window.innerHeight;
-                    camera.updateProjectionMatrix();
-                    renderer.setSize(window.innerWidth, window.innerHeight);
-                });
-            }).catch(error => {
-                console.error('Error loading textures:', error);
-                document.getElementById('loading').textContent = 'Error loading Earth textures. Please check your connection.';
             });
-            // Add stars background
-            const starGeometry = new THREE.BufferGeometry();
-            const starMaterial = new THREE.PointsMaterial({
-                color: 0xffffff,
-                size: 0.05,
-                transparent: true
-            });
-            const starVertices = [];
-            for (let i = 0; i < 5000; i++) {
-                const x = (Math.random() - 0.5) * 2000;
-                const y = (Math.random() - 0.5) * 2000;
-                const z = (Math.random() - 0.5) * 2000;
-                starVertices.push(x, y, z);
-            }
-            starGeometry.setAttribute('position', new THREE.Float32BufferAttribute(starVertices, 3));
-            const stars = new THREE.Points(starGeometry, starMaterial);
-            scene.add(stars);
+        });
+        
+        // Form Submission
+        const contactForm = document.getElementById('contactForm');
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('धन्यवाद! तपाईंको सन्देश प्राप्त भयो। हामी चाँडै नै तपाईंसँग सम्पर्क गर्नेछौं।');
+            this.reset();
         });
     </script>
+</body>
 </html>
