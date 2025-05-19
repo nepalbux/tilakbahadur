@@ -1,743 +1,583 @@
 <!DOCTYPE html>
-<html lang="ne">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>तिलक बहादुर थापा - जग्गा जमिन र स्थायी सम्पत्ति व्यवसाय</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        :root {
-            --primary-color: #2c3e50;
-            --secondary-color: #e74c3c;
-            --accent-color: #f39c12;
-            --light-color: #ecf0f1;
-            --dark-color: #2c3e50;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            line-height: 1.6;
-            color: #333;
-            background-color: #f9f9f9;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 10px;
-        }
-        
-        /* Header Styles */
-        header {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 20px 0;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-        
-        .header-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-        }
-        
-        .logo span {
-            color: var(--accent-color);
-        }
-        
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-        
-        nav ul li {
-            margin-left: 30px;
-        }
-        
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-        
-        nav ul li a:hover {
-            color: var(--accent-color);
-        }
-        
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 24px;
-            cursor: pointer;
-        }
-        
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
-            background-size: cover;
-            background-position: center;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            text-align: center;
-            color: white;
-            margin-top: 60px;
-        }
-        
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .hero h1 {
-            font-size: 48px;
-            margin-bottom: 20px;
-        }
-        
-        .hero p {
-            font-size: 20px;
-            margin-bottom: 30px;
-        }
-        
-        .btn {
-            display: inline-block;
-            background-color: var(--accent-color);
-            color: white;
-            padding: 12px 30px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: background-color 0.3s;
-        }
-        
-        .btn:hover {
-            background-color: #d35400;
-        }
-        
-        /* About Section */
-        .section {
-            padding: 80px 0;
-        }
-        
-        .section-title {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-        
-        .section-title h2 {
-            font-size: 36px;
-            color: var(--primary-color);
-            position: relative;
-            display: inline-block;
-            padding-bottom: 15px;
-        }
-        
-        .section-title h2::after {
-            content: '';
-            position: absolute;
-            width: 50%;
-            height: 3px;
-            background-color: var(--accent-color);
-            bottom: 0;
-            left: 25%;
-        }
-        
-        .about-content {
-            display: flex;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-        
-        .about-text {
-            flex: 1;
-            min-width: 300px;
-            padding-right: 30px;
-        }
-        
-        .about-image {
-            flex: 1;
-            min-width: 300px;
-        }
-        
-        .about-image img {
-            width: 100%;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        /* Services Section */
-        .services {
-            background-color: var(--light-color);
-        }
-        
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-        
-        .service-card {
-            background-color: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s, box-shadow 0.3s;
-            text-align: center;
-        }
-        
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-        }
-        
-        .service-icon {
-            font-size: 50px;
-            color: var(--accent-color);
-            margin-bottom: 20px;
-        }
-        
-        .service-card h3 {
-            margin-bottom: 15px;
-            color: var(--primary-color);
-        }
-        
-        /* Properties Section */
-        .properties-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-        
-        .property-card {
-            background-color: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s;
-        }
-        
-        .property-card:hover {
-            transform: translateY(-10px);
-        }
-        
-        .property-image {
-            height: 200px;
-            overflow: hidden;
-        }
-        
-        .property-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s;
-        }
-        
-        .property-card:hover .property-image img {
-            transform: scale(1.1);
-        }
-        
-        .property-info {
-            padding: 20px;
-        }
-        
-        .property-info h3 {
-            margin-bottom: 10px;
-            color: var(--primary-color);
-        }
-        
-        .property-info p {
-            margin-bottom: 15px;
-            color: #666;
-        }
-        
-        .property-price {
-            font-weight: bold;
-            color: var(--secondary-color);
-            font-size: 20px;
-        }
-        
-        /* Contact Section */
-        .contact {
-            background-color: var(--light-color);
-        }
-        
-        .contact-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 30px;
-        }
-        
-        .contact-info {
-            flex: 1;
-            min-width: 300px;
-        }
-        
-        .contact-info h3 {
-            margin-bottom: 20px;
-            color: var(--primary-color);
-        }
-        
-        .contact-details {
-            margin-bottom: 30px;
-        }
-        
-        .contact-details p {
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-        }
-        
-        .contact-details i {
-            margin-right: 10px;
-            color: var(--accent-color);
-            width: 20px;
-        }
-        
-        .social-links a {
-            display: inline-block;
-            margin-right: 15px;
-            color: var(--primary-color);
-            font-size: 20px;
-            transition: color 0.3s;
-        }
-        
-        .social-links a:hover {
-            color: var(--accent-color);
-        }
-        
-        .contact-form {
-            flex: 1;
-            min-width: 300px;
-            background-color: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-        }
-        
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: 500;
-        }
-        
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-        
-        .form-group textarea {
-            height: 150px;
-        }
-        
-        /* Footer */
-        footer {
-            background-color: var(--dark-color);
-            color: white;
-            padding: 30px 0;
-            text-align: center;
-        }
-        
-        .footer-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        
-        .footer-logo {
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-        
-        .footer-logo span {
-            color: var(--accent-color);
-        }
-        
-        .footer-links {
-            margin-bottom: 20px;
-        }
-        
-        .footer-links a {
-            color: white;
-            margin: 0 15px;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        
-        .footer-links a:hover {
-            color: var(--accent-color);
-        }
-        
-        .copyright {
-            margin-top: 20px;
-            font-size: 14px;
-            color: #bbb;
-        }
-        
-        .developer-credit {
-            margin-top: 10px;
-            font-size: 12px;
-            color: #999;
-        }
-        
-        .developer-credit a {
-            color: #bbb;
-            text-decoration: none;
-        }
-        
-        .developer-credit a:hover {
-            text-decoration: underline;
-        }
-        
-        /* Mobile Responsive */
-        @media (max-width: 768px) {
-            .header-container {
-                padding: 0 20px;
-            }
-            
-            nav {
-                position: fixed;
-                top: 70px;
-                left: -100%;
-                width: 80%;
-                height: calc(100vh - 70px);
-                background-color: var(--primary-color);
-                transition: left 0.3s;
-                z-index: 999;
-            }
-            
-            nav.active {
-                left: 0;
-            }
-            
-            nav ul {
-                flex-direction: column;
-                padding: 20px;
-            }
-            
-            nav ul li {
-                margin: 15px 0;
-            }
-            
-            .mobile-menu-btn {
-                display: block;
-            }
-            
-            .hero h1 {
-                font-size: 36px;
-            }
-            
-            .hero p {
-                font-size: 18px;
-            }
-            
-            .about-content {
-                flex-direction: column;
-            }
-            
-            .about-text {
-                padding-right: 0;
-                margin-bottom: 30px;
-            }
-            
-            .section-title h2 {
-                font-size: 30px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .hero h1 {
-                font-size: 28px;
-            }
-            
-            .hero p {
-                font-size: 16px;
-            }
-            
-            .btn {
-                padding: 10px 20px;
-            }
-            
-            .section {
-                padding: 50px 0;
-            }
-            
-            .footer-links {
-                display: flex;
-                flex-direction: column;
-            }
-            
-            .footer-links a {
-                margin: 5px 0;
-            }
-        }
-    </style>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tilak Bahadur Thapa personal website</title>
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script>tailwind.config={theme:{extend:{colors:{primary:'#8A2BE2',secondary:'#FFD700',accent1:'#FF6B6B',accent2:'#4ECDC4',accent3:'#45B7D1',accent4:'#A162E8'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+<style>
+:where([class^="ri-"])::before { content: "\f3c2"; }
+body {
+font-family: 'Poppins', sans-serif;
+background: linear-gradient(135deg, #0f0524 0%, #1a0f3c 100%);
+color: #fff;
+min-height: 100vh;
+}
+h1, h2, h3, h4, h5, h6 {
+font-family: 'Playfair Display', serif;
+}
+.cosmic-bg {
+background-image: url('https://ik.imagekit.io/70al5xvi0/Generated%20image%201%20(1).png?updatedAt=1747640459473');
+background-size: cover;
+background-position: center;
+}
+.star {
+position: absolute;
+width: 2px;
+height: 2px;
+background: #fff;
+border-radius: 50%;
+opacity: 0.5;
+animation: twinkle 5s infinite;
+}
+@keyframes twinkle {
+0%, 100% { opacity: 0.1; }
+50% { opacity: 0.8; }
+}
+input, textarea {
+background-color: rgba(255, 255, 255, 0.1);
+border: 1px solid rgba(255, 255, 255, 0.2);
+color: white;
+}
+input:focus, textarea:focus {
+border-color: #FFD700;
+outline: none;
+}
+.service-card {
+background: rgba(26, 15, 60, 0.7);
+transition: all 0.3s ease;
+border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.service-card:hover {
+transform: translateY(-5px);
+border-color: #FFD700;
+background: linear-gradient(135deg, rgba(138, 43, 226, 0.2) 0%, rgba(26, 15, 60, 0.8) 100%);
+}
+.nav-link {
+position: relative;
+}
+.nav-link::after {
+content: '';
+position: absolute;
+bottom: -5px;
+left: 0;
+width: 0;
+height: 2px;
+background: #FFD700;
+transition: width 0.3s ease;
+}
+.nav-link:hover::after {
+width: 100%;
+}
+.custom-checkbox {
+appearance: none;
+width: 20px;
+height: 20px;
+border: 2px solid rgba(255, 255, 255, 0.3);
+border-radius: 1px;
+background-color: transparent;
+position: relative;
+}
+.custom-checkbox:checked {
+background-color: #8A2BE2;
+border-color: #8A2BE2;
+}
+.custom-checkbox:checked::after {
+content: '';
+position: absolute;
+top: 2px;
+left: 6px;
+width: 5px;
+height: 10px;
+border: solid white;
+border-width: 0 2px 2px 0;
+transform: rotate(45deg);
+}
+.gradient-text {
+background: linear-gradient(50deg, #8A2BE2, #FF6B6B, #FFD700, #4ECDC4);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-size: 300% 300%;
+animation: gradient 8s ease infinite;
+}
+@keyframes gradient {
+0% { background-position: 0% 50%; }
+50% { background-position: 100% 50%; }
+100% { background-position: 0% 50%; }
+}
+</style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="container header-container">
-            <div class="logo">तिलक बहादुर <span>थापा</span></div>
-            <button class="mobile-menu-btn" id="mobileMenuBtn">
-                <i class="fas fa-bars"></i>
-            </button>
-            <nav id="mainNav">
-                <ul>
-                    <li><a href="#home">गृहपृष्ठ</a></li>
-                    <li><a href="#about">हाम्रो बारेमा</a></li>
-                    <li><a href="#services">सेवाहरू</a></li>
-                    <li><a href="#properties">जग्गा जमिनहरू</a></li>
-                    <li><a href="#contact">सम्पर्क</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container hero-content">
-            <h1>पोखरामा उत्कृष्ट जग्गा जमिन विकास</h1>
-            <p>खाली जग्गालाई उच्च गुणस्तर र ईमान्दारीपूर्वक आवासीय सम्पत्तिमा परिणत गर्दै</p>
-            <a href="#contact" class="btn">सम्पर्क गर्नुहोस्</a>
-        </div>
-    </section>
+<!-- Header -->
+<header class="sticky top-0 z-50 bg-opacity-0 backdrop-blur-md bg-[#0f0524]">
+<div class="container mx-auto px-4 py-4 flex justify-between items-center">
+<h1 class="text-2xl md:text-3xl font-bold text-white">
+<span class="gradient-text">Tilak</span> Bahadur Thapa
+</h1>
+<nav class="hidden md:flex space-x-8">
+<a href="#home" class="nav-link text-white hover:text-accent3 transition-colors">Home</a>
+<a href="#about" class="nav-link text-white hover:text-accent1 transition-colors">About</a>
+<a href="#services" class="nav-link text-white hover:text-accent4 transition-colors">Services</a>
+<a href="#contact" class="nav-link text-white hover:text-accent2 transition-colors">Contact</a>
+</nav>
+<button class="md:hidden w-10 h-10 flex items-center justify-center text-white">
+<i class="ri-menu-line ri-lg"></i>
+</button>
+</div>
+</header>
+<!-- Mobile Menu (Hidden by default) -->
+<div class="hidden fixed inset-0 z-20 bg-[#0f0524] bg-opacity-95">
+<div class="flex justify-end p-4">
+<button class="w-10 h-10 flex items-center justify-center text-white">
+<i class="ri-close-line ri-lg"></i>
+</button>
+</div>
+<nav class="flex flex-col items-center space-y-8 mt-16">
+<a href="#home" class="text-xl text-white hover:text-accent3 transition-colors">Home</a>
+<a href="#about" class="text-xl text-white hover:text-accent1 transition-colors">About</a>
+<a href="#services" class="text-xl text-white hover:text-accent4 transition-colors">Services</a>
+<a href="#contact" class="text-xl text-white hover:text-accent2 transition-colors">Contact</a>
+</nav>
+</div>
+<!-- Hero Section -->
+<section id="home" class="relative min-h-[90vh] flex items-center cosmic-bg">
+<div class="absolute inset-0 bg-gradient-to-r from-[#0f0524] via-[#0f0524cc] to-transparent"></div>
+<div class="container mx-auto px-4 relative z-10">
+<div class="max-w-2xl">
+<h2 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight gradient-text">
+"Find Your Perfect Place to Call Home"
 
-    <!-- About Section -->
-    <section class="section" id="about">
-        <div class="container">
-            <div class="section-title">
-                <h2>मेरो बारेमा</h2>
-            </div>
-            <div class="about-content">
-                <div class="about-text">
-                    <h3>तिलक बहादुर थापा</h3>
-                    <p>१५ वर्षभन्दा बढीको रियल इस्टेट अनुभवको साथ, तिलक बहादुर थापा पोखरा क्षेत्रमा जग्गा जमिन विकासको विश्वसनीय नाम बनेका छन्। हाम्रो व्यवसायले उत्तम जग्गा खरिद गर्ने, यसलाई आवासीय निर्माणको लागि तयार गर्ने, र परिवारहरूले आफ्नो सपनाको घर बनाउन सक्ने मूल्यवान सम्पत्तिहरू सिर्जना गर्न विशेषज्ञता राख्दछ।</p>
-                    <p>हामी जग्गा विकासको हाम्रो सूक्ष्म दृष्टिकोणमा गर्व गर्छौं, जसमा उचित ग्रेडिंग, जल निकासी, र पहुँच सुनिश्चित गरी सम्पत्तिहरू बिक्री गरिन्छ। नैतिक व्यवसाय अभ्यास र ग्राहक सन्तुष्टिको प्रतिबद्धताले स्थानीय रियल इस्टेट बजारमा हामीलाई विश्वसनीयताको प्रतिष्ठा दिलाएको छ।</p>
-                    <p>पोखरा-२६, विजयपुरमा आधारित, हामीसँग स्थानीय जग्गा बजार र विकास नियमहरूको गहिरो बुझाइ छ, जसले हाम्रा ग्राहकहरूलाई विश्वासका साथ प्रक्रिया निर्देशन गर्न मद्दत गर्दछ।</p>
-                </div>
-                <div class="about-image">
-                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="तिलक बहादुर थापा रियल इस्टेट विक्रेता">
-                </div>
-            </div>
-        </div>
-    </section>
+</h2>
+<p class="text-xl md:text-2xl mb-8 text-gray-200">
+"Your trusted guide in real estate, neighborhood insights, and smart property decisions. Discover your ideal home and start your next chapter with confidence."
+</p>
+<button class="bg-gradient-to-r from-accent4 to-accent1 text-white px-8 py-4 rounded-button text-lg font-medium hover:opacity-90 transition-opacity flex items-center">
+<i class="ri-calendar-line ri-lg mr-2"></i>
+Book A Plot For Future
+</button>
+</div>
+</div>
+</section>
+<!-- About Section -->
+<section id="about" class="py-20">
+<div class="container mx-auto px-4">
+<h2 class="text-3xl md:text-4xl font-bold mb-16 text-center">
+<span class="gradient-text">About</span> Tilak Bahadur Thapa
+</h2>
+<div class="flex flex-col md:flex-row gap-12 items-center">
+<div class="md:w-1/2">
+<img src="https://ik.imagekit.io/70al5xvi0/Generated%20image%201%20(2).png?updatedAt=1747640459076"
+alt="Tilak Bahadur Thapa"
+class="rounded-lg w-full h-auto object-cover">
+</div>
+<div class="md:w-1/2">
+<h3 class="text-2xl md:text-3xl font-semibold mb-6 gradient-text">My Real-state Journey</h3>
+<p class="mb-4 text-gray-200">
+With over 15 years of experience in real estate, I’ve dedicated my career to helping individuals and families find the perfect place to call home. My journey began in the vibrant neighborhoods of Nepal, where I developed a deep understanding of the local market and built lasting relationships based on trust and results.
+</p>
+<p class="mb-4 text-gray-200">
+I combine deep market knowledge with modern real estate strategies to deliver accurate insights and successful outcomes. My approach is client-focused and holistic—considering not just the property, but your lifestyle, goals, and the many factors that influence a smart real estate decision.
 
-    <!-- Services Section -->
-    <section class="section services" id="services">
-        <div class="container">
-            <div class="section-title">
-                <h2>मेरो सेवाहरू</h2>
-            </div>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-search-location"></i>
-                    </div>
-                    <h3>जग्गा जमिन खरिद</h3>
-                    <p>हामी पोखरा क्षेत्रमा आवासीय विकासको उत्कृष्ट सम्भावनाका साथ उत्तम जग्गा जमिन चिनाउँदछौं र खरिद गर्दछौं।</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-tractor"></i>
-                    </div>
-                    <h3>जग्गा जमिन तयारी</h3>
-                    <p>हाम्रो टोलीले उचित ग्रेडिंग, जल निकासी, र पहुँच सुधारहरूका साथ निर्माणको लागि जग्गा तयार गर्दछ।</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-home"></i>
-                    </div>
-                    <h3>आवासीय प्लट बिक्री</h3>
-                    <p>हामी आवश्यक उपयोगिताहरू र स्पष्ट कागजातहरूका साथ बनाउन तयार आवासीय प्लटहरू प्रदान गर्दछौं।</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-handshake"></i>
-                    </div>
-                    <h3>परामर्श</h3>
-                    <p>जग्गा खरिद, विकास सम्भावना, र स्थानीय निर्माण नियमहरूको विषयमा विशेषज्ञ सल्लाह।</p>
-                </div>
-            </div>
-        </div>
-    </section>
+</p>
+<p class="mb-8 text-gray-200">
+Throughout my career, I’ve helped hundreds of clients navigate the complexities of buying and selling property, find their ideal homes, and make confident investment decisions. My mission is to empower you with clear guidance, expert knowledge, and a smooth, stress-free real estate experience.
 
-    <!-- Properties Section -->
-    <section class="section" id="properties">
-        <div class="container">
-            <div class="section-title">
-                <h2>चयनित जग्गा जमिनहरू</h2>
-            </div>
-            <div class="properties-grid">
-                <div class="property-card">
-                    <div class="property-image">
-                        <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="विजयपुर आवासीय प्लट">
-                    </div>
-                    <div class="property-info">
-                        <h3>विजयपुर हाइट्स</h3>
-                        <p>पोखरा-२६, विजयपुरमा हिमाल दृश्य भएको प्रिमियम आवासीय प्लट</p>
-                        <p><i class="fas fa-ruler-combined"></i> ५ आना (१७४.२४ वर्ग मिटर)</p>
-                        <p><i class="fas fa-map-marker-alt"></i> विद्यालय र बजारहरूबाट हिँड्ने दूरीमा</p>
-                        <p class="property-price">रु ३५,००,०००</p>
-                    </div>
-                </div>
-                <div class="property-card">
-                    <div class="property-image">
-                        <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="लेकसाइड दृश्य प्लट">
-                    </div>
-                    <div class="property-info">
-                        <h3>लेकसाइड दृश्य प्लटहरू</h3>
-                        <p>फेवा तालको आंशिक दृश्य भएको सीमित उपलब्धता प्लटहरू</p>
-                        <p><i class="fas fa-ruler-combined"></i> ७ आना (२४४ वर्ग मिटर)</p>
-                        <p><i class="fas fa-map-marker-alt"></i> पोखरा शहर केन्द्रबाट १० मिनेट ड्राइव</p>
-                        <p class="property-price">रु ५०,००,०००</p>
-                    </div>
-                </div>
-                <div class="property-card">
-                    <div class="property-image">
-                        <img src="https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="परिवार आवासीय प्लट">
-                    </div>
-                    <div class="property-info">
-                        <h3>परिवार आवासीय प्लटहरू</h3>
-                        <p>शान्त आवास क्षेत्रमा परिवारका घरहरूको लागि उत्तम</p>
-                        <p><i class="fas fa-ruler-combined"></i> १० आना (३४९ वर्ग मिटर)</p>
-                        <p><i class="fas fa-map-marker-alt"></i> २४/७ सुरक्षा भएको गेटेड कम्युनिटी</p>
-                        <p class="property-price">रु ४५,००,०००</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+</p>
+<div class="flex space-x-4">
+<div class="flex flex-col items-center">
+<div class="text-3xl font-bold text-accent1 mb-2">15+</div>
+<div class="text-sm text-gray-300">Years Experience</div>
+</div>
+<div class="w-px bg-gray-700"></div>
+<div class="flex flex-col items-center">
+<div class="text-3xl font-bold text-accent2 mb-2">1,000+</div>
+<div class="text-sm text-gray-300">Plots Solo Out</div>
+</div>
+<div class="w-px bg-gray-700"></div>
+<div class="flex flex-col items-center">
+<div class="text-3xl font-bold text-accent3 mb-2">98%</div>
+<div class="text-sm text-gray-300">Client Satisfaction</div>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-20 bg-gradient-to-br from-[#1a0f3c] to-[#2a1a5e] rounded-lg p-8">
+<h3 class="text-2xl font-semibold mb-6 text-center gradient-text">My Real-Estate Expertise</h3>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="flex flex-col items-center text-center">
+<div class="w-16 h-16 flex items-center justify-center mb-4 text-accent1">
+<i class="ri-planet-line ri-2x"></i>
+</div>
+<h4 class="text-xl font-medium mb-2">Buying a Perfect Plot</h4>
+<p class="text-gray-300">Proven expertise to uncover your ideal home and real estate opportunities that align with your goals</p>
+</div>
+<div class="flex flex-col items-center text-center">
+<div class="w-16 h-16 flex items-center justify-center mb-4 text-accent2">
+<i class="ri-numbers-line ri-2x"></i>
+</div>
+<h4 class="text-xl font-medium mb-2">Cutting And Filling Of Land</h4>
+<p class="text-gray-300">Discover the true value behind every property and what it means for your future</p>
+</div>
+<div class="flex flex-col items-center text-center">
+<div class="w-16 h-16 flex items-center justify-center mb-4 text-accent3">
+<i class="ri-hand-line ri-2x"></i>
+</div>
+<h4 class="text-xl font-medium mb-2">Making Plots According to BASTU</h4>
+<p class="text-gray-300">Analyzing every detail to guide you toward the right property and a successful real estate journey consulting with BASTU experts</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Services Section -->
+<section id="services" class="py-20 bg-gradient-to-b from-[#120936] to-[#1a0f3c]">
+<div class="container mx-auto px-4">
+<h2 class="text-3xl md:text-4xl font-bold mb-16 text-center">
+<span class="gradient-text">Real-Estate</span> Services
+</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Service 1 -->
+<div class="service-card rounded-lg p-6 h-full flex flex-col">
+<div class="w-16 h-16 flex items-center justify-center mb-4 text-accent1">
+<i class="ri-user-star-line ri-2x"></i>
+</div>
+<h3 class="text-xl font-semibold mb-3">Comprehensive Property Consultation</h3>
+<p class="text-gray-300 mb-6 flex-grow">
+A detailed analysis of your real estate needs, preferences, and long-term goals. We evaluate location advantages, property features, market trends, and investment potential to match you with the perfect home or property. Includes personalized recommendations and strategic guidance to support confident decision-making.
+</p>
+<button class="mt-auto bg-transparent border border-accent1 text-accent1 hover:bg-accent1 hover:text-white transition-colors px-6 py-2 rounded-button whitespace-nowrap">
+Book Now
+</button>
+</div>
+<!-- Service 2 -->
+<div class="service-card rounded-lg p-6 h-full flex flex-col">
+<div class="w-16 h-16 flex items-center justify-center mb-4 text-accent2">
+<i class="ri-heart-2-line ri-2x"></i>
+</div>
+<h3 class="text-xl font-semibold mb-3">Neighborhood & Lifestyle Matching</h3>
+<p class="text-gray-300 mb-6 flex-grow">
+We go beyond square footage and price to match you with a neighborhood that aligns with your lifestyle, values, and daily needs. Whether you're looking for peace and quiet, vibrant city life, or family-friendly communities, we help you find not just a house—but a home that fits your way of living.
+</p>
+<button class="mt-auto bg-transparent border border-accent2 text-accent2 hover:bg-accent2 hover:text-white transition-colors px-6 py-2 rounded-button whitespace-nowrap">
+Book Now
+</button>
+</div>
+<!-- Service 3 -->
+<div class="service-card rounded-lg p-6 h-full flex flex-col">
+<div class="w-16 h-16 flex items-center justify-center mb-4 text-accent3">
+<i class="ri-numbers-line ri-2x"></i>
+</div>
+<h3 class="text-xl font-semibold mb-3">Property Value & Market Analysis</h3>
+<p class="text-gray-300 mb-6 flex-grow">
+Gain a clear understanding of your property's worth with an in-depth market analysis. We assess current market trends, comparable sales, and local demand to provide accurate valuations—empowering you to price, negotiate, or invest with confidence.
+</p>
+<button class="mt-auto bg-transparent border border-accent3 text-accent3 hover:bg-accent3 hover:text-white transition-colors px-6 py-2 rounded-button whitespace-nowrap">
+Book Now
+</button>
+</div>
 
-    <!-- Contact Section -->
-    <section class="section contact" id="contact">
-        <div class="container">
-            <div class="section-title">
-                <h2>हामीलाई सम्पर्क गर्नुहोस्</h2>
-            </div>
-            <div class="contact-container">
-                <div class="contact-info">
-                    <h3>सम्पर्क जानकारी</h3>
-                    <div class="contact-details">
-                        <p><i class="fas fa-map-marker-alt"></i> पोखरा-२६, विजयपुर, नेपाल</p>
-                        <p><i class="fas fa-phone"></i> ९८५६०७५००९</p>
-                        <p><i class="fas fa-envelope"></i> info@tilakthaparealestate.com</p>
-                    </div>
-                    <h3>कार्यालय समय</h3>
-                    <p><i class="fas fa-clock"></i> आइतबार-शुक्रबार: ९:०० बिहान - ६:०० बेलुका</p>
-                    <p><i class="fas fa-clock"></i> शनिबार: बन्द</p>
-                    <div class="social-links">
-                        <h3 style="margin-top: 20px;">सामाजिक सञ्जाल</h3>
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-                <div class="contact-form">
-                    <form id="contactForm">
-                        <div class="form-group">
-                            <label for="name">तपाईंको नाम</label>
-                            <input type="text" id="name" name="name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">तपाईंको इमेल</label>
-                            <input type="email" id="email" name="email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="phone">तपाईंको फोन नम्बर</label>
-                            <input type="tel" id="phone" name="phone">
-                        </div>
-                        <div class="form-group">
-                            <label for="message">तपाईंको सन्देश</label>
-                            <textarea id="message" name="message" required></textarea>
-                        </div>
-                        <button type="submit" class="btn">सन्देश पठाउनुहोस्</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
+</div>
+</div>
+</div>
+</section>
+<!-- Testimonials Section -->
+<section class="py-20 bg-gradient-to-b from-[#1a0f3c] to-[#120936]">
+<div class="container mx-auto px-4">
+<h2 class="text-3xl md:text-4xl font-bold mb-16 text-center">
+<span class="gradient-text">Client</span> Testimonials
+</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Testimonial 1 -->
+<div class="bg-gradient-to-br from-[#1a0f3c] to-[#2a1a5e] p-6 rounded-lg">
+<div class="flex mb-4">
+<i class="ri-star-fill text-accent1"></i>
+<i class="ri-star-fill text-accent1"></i>
+<i class="ri-star-fill text-accent1"></i>
+<i class="ri-star-fill text-accent1"></i>
+<i class="ri-star-fill text-accent1"></i>
+</div>
+<p class="text-gray-200 mb-6 italic">
+"Working with Tilak was a game-changer. Their deep knowledge of the local market helped me find the perfect land that fits my family’s needs and budget. The whole process was smooth, and I felt supported every step of the way!"
+</p>
+<div class="flex items-center">
+<div class="w-12 h-12 rounded-full bg-accent1 flex items-center justify-center text-[#0f0524] font-bold">RP</div>
+<div class="ml-4">
+<div class="font-medium">Rajesh Ranabhat</div>
+<div class="text-sm text-gray-400">Business Consultant</div>
+</div>
+</div>
+</div>
+<!-- Testimonial 2 -->
+<div class="bg-gradient-to-br from-[#1a0f3c] to-[#2a1a5e] p-6 rounded-lg">
+<div class="flex mb-4">
+<i class="ri-star-fill text-accent2"></i>
+<i class="ri-star-fill text-accent2"></i>
+<i class="ri-star-fill text-accent2"></i>
+<i class="ri-star-fill text-accent2"></i>
+<i class="ri-star-fill text-accent2"></i>
+</div>
+<p class="text-gray-200 mb-6 italic">
+"Tilak helped me navigate a complicated investment property purchase with ease. Their attention to detail and honest guidance made all the difference. I feel confident in my investment thanks to their expertise."
+</p>
+<div class="flex items-center">
+<div class="w-12 h-12 rounded-full bg-accent2 flex items-center justify-center text-[#0f0524] font-bold">AS</div>
+<div class="ml-4">
+<div class="font-medium">Jas B. Gurung</div>
+<div class="text-sm text-gray-400">Banker</div>
+</div>
+</div>
+</div>
+<!-- Testimonial 3 -->
+<div class="bg-gradient-to-br from-[#1a0f3c] to-[#2a1a5e] p-6 rounded-lg">
+<div class="flex mb-4">
+<i class="ri-star-fill text-accent3"></i>
+<i class="ri-star-fill text-accent3"></i>
+<i class="ri-star-fill text-accent3"></i>
+<i class="ri-star-fill text-accent3"></i>
+<i class="ri-star-fill text-accent3"></i>
+</div>
+<p class="text-gray-200 mb-6 italic">
+"I was selling my property and wasn’t sure where to start. Thanks to Tilak, I got a clear market analysis and expert advice that helped me price my home right. It sold quickly and for a great price—couldn’t be happier!"
+</p>
+<div class="flex items-center">
+<div class="w-12 h-12 rounded-full bg-accent3 flex items-center justify-center text-[#0f0524] font-bold">DT</div>
+<div class="ml-4">
+<div class="font-medium">Sunita Adhikari</div>
+<div class="text-sm text-gray-400">Teacher</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Contact Section -->
+<section id="contact" class="py-20 bg-gradient-to-b from-[#120936] to-[#0a041d]">
+<div class="container mx-auto px-4">
+<h2 class="text-3xl md:text-4xl font-bold mb-16 text-center">
+<span class="gradient-text">Contact</span> Me
+</h2>
+<div class="flex flex-col md:flex-row gap-12">
+<!-- Contact Form -->
+<div class="md:w-1/2">
+<h3 class="text-2xl font-semibold mb-6 gradient-text">Send a Message</h3>
+<form>
+<div class="mb-6">
+<label for="name" class="block mb-2 text-gray-300">Full Name</label>
+<input type="text" id="name" class="w-full px-4 py-3 rounded border-none focus:ring-2 focus:ring-accent1" placeholder="Your name">
+</div>
+<div class="mb-6">
+<label for="email" class="block mb-2 text-gray-300">Email Address</label>
+<input type="email" id="email" class="w-full px-4 py-3 rounded border-none focus:ring-2 focus:ring-accent2" placeholder="Your email">
+</div>
+<div class="mb-6">
+<label for="subject" class="block mb-2 text-gray-300">Subject</label>
+<input type="text" id="subject" class="w-full px-4 py-3 rounded border-none focus:ring-2 focus:ring-accent3" placeholder="Subject of your message">
+</div>
+<div class="mb-6">
+<label for="message" class="block mb-2 text-gray-300">Message</label>
+<textarea id="message" rows="5" class="w-full px-4 py-3 rounded border-none focus:ring-2 focus:ring-accent4" placeholder="Your message"></textarea>
+</div>
+<div class="mb-6 flex items-start">
+<input type="checkbox" id="consent" class="custom-checkbox mr-3 mt-1">
+<label for="consent" class="text-sm text-gray-300">I consent to having my information processed to receive responses to my inquiry.</label>
+</div>
+<button type="submit" class="w-full bg-gradient-to-r from-accent4 to-accent1 text-white py-3 rounded-button font-medium hover:opacity-90 transition-opacity !rounded-button whitespace-nowrap">
+Send Message
+</button>
+</form>
+</div>
+<!-- Contact Information -->
+<div class="md:w-1/2">
+<h3 class="text-2xl font-semibold mb-6 gradient-text">Get in Touch</h3>
+<div class="space-y-6 mb-8">
+<div class="flex items-start">
+<div class="w-10 h-10 flex items-center justify-center text-accent1 mr-4">
+<i class="ri-phone-line ri-lg"></i>
+</div>
+<div>
+<h4 class="font-medium mb-1">Phone</h4>
+<p class="text-gray-300">+977-9856075009</p>
+</div>
+</div>
+<div class="flex items-start">
+<div class="w-10 h-10 flex items-center justify-center text-accent2 mr-4">
+<i class="ri-mail-line ri-lg"></i>
+</div>
+<div>
+<h4 class="font-medium mb-1">Email</h4>
+<p class="text-gray-300">tilakbthapa@gmail.com</p>
+</div>
+</div>
+<div class="flex items-start">
+<div class="w-10 h-10 flex items-center justify-center text-accent3 mr-4">
+<i class="ri-map-pin-line ri-lg"></i>
+</div>
+<div>
+<h4 class="font-medium mb-1">Location</h4>
+<p class="text-gray-300">Pokhara-26, Bijayapur, Nepal</p>
+</div>
+</div>
+<div class="flex items-start">
+<div class="w-10 h-10 flex items-center justify-center text-accent4 mr-4">
+<i class="ri-time-line ri-lg"></i>
+</div>
+<div>
+<h4 class="font-medium mb-1">Consultation Hours</h4>
+<p class="text-gray-300">Sunday - Friday: 9:00 AM - 6:00 PM</p>
+<p class="text-gray-300">Saturday: Closed</p>
+</div>
+</div>
+</div>
+<div class="rounded-lg overflow-hidden h-80 mb-6">
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2834.0223988845355!2d84.02631552596766!3d28.20116672527161!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399597006897fc53%3A0x1b36a38926aeaa89!2sN.%20Sita%20properties%20Solution%20Pvt.%20Ltd!5e1!3m2!1sen!2snp!4v1747643805103!5m2!1sen!2snp" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+</div>
+<div>
+<h4 class="font-medium mb-3">Follow Me</h4>
+<div class="flex space-x-4">
+<a href="https://www.youtube.com/@ptcnepal7047" target="_blank" rel="noopener noreferrer" class="w-10 h-10 flex items-center justify-center rounded-full bg-blue-400 text-white hover:bg-white hover:text-blue-400 transition-colors">
+<i class="ri-facebook-fill"></i>
+</a>
+<a href="https://www.youtube.com/@ptcnepal7047" target="_blank" rel="noopener noreferrer" class="w-10 h-10 flex items-center justify-center rounded-full bg-pink-400 text-white hover:bg-white hover:text-pink-400 transition-colors">
+<i class="ri-instagram-line"></i>
+</a>
+<a href="https://www.youtube.com/@ptcnepal7047" target="_blank" rel="noopener noreferrer" class="w-10 h-10 flex items-center justify-center rounded-full bg-red-400 text-white hover:bg-white hover:text-red-400 transition-colors">
+<i class="ri-youtube-line"></i>
+</a>
+<a href="https://www.youtube.com/@ptcnepal7047" target="_blank" rel="noopener noreferrer" class="w-10 h-10 flex items-center justify-center rounded-full bg-green-400 text-white hover:bg-white hover:text-green-400 transition-colors">
+<i class="ri-whatsapp-line"></i>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="py-16 relative overflow-hidden">
+<div class="absolute inset-0" style="background-image: url('<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2834.0223988845355!2d84.02631552596766!3d28.20116672527161!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399597006897fc53%3A0x1b36a38926aeaa89!2sN.%20Sita%20properties%20Solution%20Pvt.%20Ltd!5e1!3m2!1sen!2snp!4v1747643805103!5m2!1sen!2snp" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>'); background-size: cover; background-position: center; opacity: 0.3;"></div>
+<div class="container mx-auto px-4 relative z-10">
+<div class="max-w-3xl mx-auto text-center">
+<h2 class="text-3xl md:text-4xl font-bold mb-6 gradient-text">Book A Plot Today, Secure Your Future</h2>
+<p class="text-xl text-gray-200 mb-8">
+Let expert guidance lead you to the home that matches your dreams and lifestyle. Schedule your personalized property consultation today.
+</p>
+<div class="flex flex-col sm:flex-row gap-4 justify-center">
+<button class="bg-gradient-to-r from-accent4 to-accent1 text-white px-8 py-4 rounded-button text-lg font-medium hover:opacity-90 transition-opacity !rounded-button whitespace-nowrap">
+Book a Plot Today
+</button>
+<button class="bg-transparent border-2 border-accent2 text-accent2 px-8 py-4 rounded-button text-lg font-medium hover:bg-accent2 hover:text-white transition-colors !rounded-button whitespace-nowrap">
+View Services
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-[#0a041d] pt-16 pb-8">
+<div class="container mx-auto px-4">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+<div>
+<h3 class="text-xl font-semibold mb-6 gradient-text">Tilak bahadur Thapa</h3>
+<p class="text-gray-400 mb-6">
+"Your trusted guide in real estate, neighborhood insights, and smart property decisions. Discover your ideal home and start your next chapter with confidence."
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">तिलक बहादुर<span>थापा</span></div>
-                <div class="footer-links">
-                    <a href="#home">गृहपृष्ठ</a>
-                    <a href="#about">हाम्रो बारेमा</a>
-                    <a href="#services">सेवाहरू</a>
-                    <a href="#properties">जग्गा जमिनहरू</a>
-                    <a href="#contact">सम्पर्क</a>
-                </div>
-                <div class="copyright">
-                    &copy; 2025 तिलक बहादुर थापा। सर्वाधिकार सुरक्षित।
-                </div>
-                <div class="developer-credit">
-                    वेबसाइट विकास : <a href="http://www.ptcnepal.com.np" target="_blank">PTC Nepal</a>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // Mobile Menu Toggle
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const mainNav = document.getElementById('mainNav');
-        
-        mobileMenuBtn.addEventListener('click', () => {
-            mainNav.classList.toggle('active');
-        });
-        
-        // Smooth Scrolling for Anchor Links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                
-                if (mainNav.classList.contains('active')) {
-                    mainNav.classList.remove('active');
-                }
-                
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-        
-        // Form Submission
-        const contactForm = document.getElementById('contactForm');
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('धन्यवाद! तपाईंको सन्देश प्राप्त भयो। हामी चाँडै नै तपाईंसँग सम्पर्क गर्नेछौं।');
-            this.reset();
-        });
-    </script>
+</p>
+<div class="flex space-x-4">
+<a href="https://www.youtube.com/@ptcnepal7047" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-accent1 transition-colors">
+<i class="ri-facebook-fill"></i>
+</a>
+<a href="https://www.youtube.com/@ptcnepal7047" target="_blank" rel="noopener noreferrer" class="text-pink-400 hover:text-accent1 transition-colors">
+<i class="ri-instagram-line"></i>
+</a>
+<a href="https://www.youtube.com/@ptcnepal7047" target="_blank" rel="noopener noreferrer" class="text-red-400 hover:text-accent1 transition-colors">
+<i class="ri-youtube-line"></i>
+</a>
+<a href="https://www.youtube.com/@ptcnepal7047" target="_blank" rel="noopener noreferrer" class="text-green-400 hover:text-accent1 transition-colors">
+<i class="ri-whatsapp-line"></i>
+</a>
+</div>
+</div>
+<div>
+<h3 class="text-xl font-semibold mb-6 gradient-text">Quick Links</h3>
+<ul class="space-y-3">
+<li><a href="#home" class="text-gray-400 hover:text-accent1 transition-colors">Home</a></li>
+<li><a href="#about" class="text-gray-400 hover:text-accent2 transition-colors">About</a></li>
+<li><a href="#services" class="text-gray-400 hover:text-accent3 transition-colors">Services</a></li>
+<li><a href="#contact" class="text-gray-400 hover:text-accent4 transition-colors">Contact</a></li>
+<li><a href="#" class="text-gray-400 hover:text-accent1 transition-colors">Privacy Policy</a></li>
+</ul>
+</div>
+<div>
+<h3 class="text-xl font-semibold mb-6 gradient-text">Services</h3>
+<ul class="space-y-3">
+<li><a href="#" class="text-gray-400 hover:text-accent1 transition-colors">Buying Land</a></li>
+<li><a href="#" class="text-gray-400 hover:text-accent2 transition-colors">Cutting and filling of plot</a></li>
+<li><a href="#" class="text-gray-400 hover:text-accent3 transition-colors">Making plots properly</a></li>
+<li><a href="#" class="text-gray-400 hover:text-accent4 transition-colors">Banking Facility</a></li>
+<li><a href="#" class="text-gray-400 hover:text-accent1 transition-colors">EMI Facility</a></li>
+</ul>
+</div>
+<div>
+<h3 class="text-xl font-semibold mb-6 gradient-text">Contact</h3>
+<ul class="space-y-3">
+<li class="flex items-start">
+<i class="ri-map-pin-line text-accent1 mr-3 mt-1"></i>
+<span class="text-gray-400">Bijayapur-26, Pokhara, Nepal</span>
+</li>
+<li class="flex items-start">
+<i class="ri-phone-line text-accent2 mr-3 mt-1"></i>
+<span class="text-gray-400">+977-9856075009</span>
+</li>
+<li class="flex items-start">
+<i class="ri-mail-line text-accent3 mr-3 mt-1"></i>
+<span class="text-gray-400">tilakbthapa@gmail.com</span>
+</li>
+<li class="flex items-start">
+<i class="ri-time-line text-accent4 mr-3 mt-1"></i>
+<span class="text-gray-400">Mon-Sat: 9:00 AM - 6:00 PM</span>
+</li>
+</ul>
+</div>
+</div>
+<div class="border-t border-gray-800 pt-8 mt-8">
+<div class="flex flex-col md:flex-row justify-between items-center">
+<p class="text-gray-500 text-sm mb-4 md:mb-0">
+&copy; 2025 Tilak Bahadur Thapa. All rights reserved.
+</p>
+<p class="text-gray-400 mr-1">Developed by:
+<a href="https://ramrajabastakoti.com.np" target="_blank" class="gradient-text hover:text-white transition duration-300">Ramraja</a>
+</p>
+</div>
+</div>
+</div>
+</footer>
+<script>
+// Mobile menu toggle
+document.addEventListener('DOMContentLoaded', function() {
+const menuButton = document.querySelector('button.md\\:hidden');
+const mobileMenu = document.querySelector('.fixed.inset-0.z-50.bg-\\[\\#0f0524\\]');
+const closeButton = mobileMenu.querySelector('button');
+menuButton.addEventListener('click', function() {
+mobileMenu.classList.remove('hidden');
+});
+closeButton.addEventListener('click', function() {
+mobileMenu.classList.add('hidden');
+});
+// Close mobile menu when clicking on a link
+const mobileLinks = mobileMenu.querySelectorAll('a');
+mobileLinks.forEach(link => {
+link.addEventListener('click', function() {
+mobileMenu.classList.add('hidden');
+});
+});
+});
+</script>
 </body>
 </html>
